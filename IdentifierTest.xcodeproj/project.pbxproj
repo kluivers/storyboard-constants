@@ -22,6 +22,8 @@
 		A97FF2C718A9762A0071A28D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A97FF2A618A9762A0071A28D /* UIKit.framework */; };
 		A97FF2CF18A9762A0071A28D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A97FF2CD18A9762A0071A28D /* InfoPlist.strings */; };
 		A97FF2D118A9762A0071A28D /* IdentifierTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A97FF2D018A9762A0071A28D /* IdentifierTestTests.m */; };
+		A97FF2DD18A9785F0071A28D /* generate_constants.py in Resources */ = {isa = PBXBuildFile; fileRef = A97FF2DC18A9785F0071A28D /* generate_constants.py */; };
+		A97FF2E118A9796E0071A28D /* JBWStoryboardIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = A97FF2E018A9796E0071A28D /* JBWStoryboardIdentifiers.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,9 @@
 		A97FF2CC18A9762A0071A28D /* IdentifierTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IdentifierTestTests-Info.plist"; sourceTree = "<group>"; };
 		A97FF2CE18A9762A0071A28D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A97FF2D018A9762A0071A28D /* IdentifierTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IdentifierTestTests.m; sourceTree = "<group>"; };
+		A97FF2DC18A9785F0071A28D /* generate_constants.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = generate_constants.py; sourceTree = "<group>"; };
+		A97FF2DF18A9796E0071A28D /* JBWStoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBWStoryboardIdentifiers.h; sourceTree = "<group>"; };
+		A97FF2E018A9796E0071A28D /* JBWStoryboardIdentifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBWStoryboardIdentifiers.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +90,7 @@
 		A97FF29618A976290071A28D = {
 			isa = PBXGroup;
 			children = (
+				A97FF2DB18A978400071A28D /* Scripts */,
 				A97FF2A818A9762A0071A28D /* IdentifierTest */,
 				A97FF2CA18A9762A0071A28D /* IdentifierTestTests */,
 				A97FF2A118A9762A0071A28D /* Frameworks */,
@@ -115,6 +121,7 @@
 		A97FF2A818A9762A0071A28D /* IdentifierTest */ = {
 			isa = PBXGroup;
 			children = (
+				A97FF2DE18A978CB0071A28D /* generated */,
 				A97FF2B118A9762A0071A28D /* JBWAppDelegate.h */,
 				A97FF2B218A9762A0071A28D /* JBWAppDelegate.m */,
 				A97FF2B418A9762A0071A28D /* Main.storyboard */,
@@ -157,6 +164,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A97FF2DB18A978400071A28D /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				A97FF2DC18A9785F0071A28D /* generate_constants.py */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
+		A97FF2DE18A978CB0071A28D /* generated */ = {
+			isa = PBXGroup;
+			children = (
+				A97FF2DF18A9796E0071A28D /* JBWStoryboardIdentifiers.h */,
+				A97FF2E018A9796E0071A28D /* JBWStoryboardIdentifiers.m */,
+			);
+			path = generated;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -164,6 +188,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A97FF2D418A9762A0071A28D /* Build configuration list for PBXNativeTarget "IdentifierTest" */;
 			buildPhases = (
+				A97FF2DA18A976F10071A28D /* ShellScript */,
 				A97FF29B18A9762A0071A28D /* Sources */,
 				A97FF29C18A9762A0071A28D /* Frameworks */,
 				A97FF29D18A9762A0071A28D /* Resources */,
@@ -237,6 +262,7 @@
 				A97FF2BE18A9762A0071A28D /* Images.xcassets in Resources */,
 				A97FF2AD18A9762A0071A28D /* InfoPlist.strings in Resources */,
 				A97FF2B618A9762A0071A28D /* Main.storyboard in Resources */,
+				A97FF2DD18A9785F0071A28D /* generate_constants.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +276,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A97FF2DA18A976F10071A28D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/IdentifierTest/Base.lproj/Main.storyboard",
+			);
+			outputPaths = (
+				"$(PROJECT_DIR)/IdentifierTest/generated/JBWStoryboardIdentifiers.h",
+				"$(PROJECT_DIR)/IdentifierTest/generated/JBWStoryboardIdentifiers.m",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "mkdir -p \"${PROJECT_DIR}/IdentifierTest/generated\"\n\npython \"${PROJECT_DIR}/Scripts/generate_constants.py\" \"${SCRIPT_OUTPUT_FILE_0}\" \"${SCRIPT_OUTPUT_FILE_1}\"";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A97FF29B18A9762A0071A28D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -258,6 +304,7 @@
 				A97FF2B318A9762A0071A28D /* JBWAppDelegate.m in Sources */,
 				A97FF2BC18A9762A0071A28D /* JBWDetailViewController.m in Sources */,
 				A97FF2B918A9762A0071A28D /* JBWMasterViewController.m in Sources */,
+				A97FF2E118A9796E0071A28D /* JBWStoryboardIdentifiers.m in Sources */,
 				A97FF2AF18A9762A0071A28D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
