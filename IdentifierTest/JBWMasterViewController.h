@@ -10,4 +10,6 @@
 
 @interface JBWMasterViewController : UITableViewController
 
+- (IBAction) buttonAction:(id)sender;
+
 @end

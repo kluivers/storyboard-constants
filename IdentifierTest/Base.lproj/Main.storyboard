@@ -57,7 +57,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="tQt-TN-PWz">
-                        <barButtonItem key="rightBarButtonItem" title="Tap Me" id="Y2H-eB-xqh"/>
+                        <barButtonItem key="rightBarButtonItem" title="Tap Me" id="Y2H-eB-xqh">
+                            <connections>
+                                <action selector="buttonAction:" destination="pGg-6v-bdr" id="ceZ-hy-u8X"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
