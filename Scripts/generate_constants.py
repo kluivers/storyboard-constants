@@ -7,6 +7,7 @@ PREFIX = "jbw"
 
 segueIdentifiers = {}
 controllerIdentifiers = {}
+reuseIdentifiers = {}
 
 def addSegueIdentifier(identifier):
 	key = identifier[0].upper() + identifier[1:]
@@ -21,6 +22,13 @@ def addControllerIdentifier(identifier):
         key = PREFIX.upper() + key
     
     controllerIdentifiers[key] = identifier
+
+def addReuseIdentifier(identifier):
+  key = identifier[0].upper() + identifier[1:]
+  if not key.startswith(PREFIX.upper()):
+    key = PREFIX.upper() + key
+
+  reuseIdentifiers[key] = identifier
 
 def process_storyboard(file):
     tree = et.parse(file)
@@ -37,6 +45,12 @@ def process_storyboard(file):
         if controllerIdentifier == None:
             continue
         addControllerIdentifier(controllerIdentifier)
+
+    for cell in root.findall(".//*[@reuseIdentifier]"):
+      reuseIdentifier = cell.get("reuseIdentifier")
+      if reuseIdentifier == None:
+        continue
+      addReuseIdentifier(reuseIdentifier)
 
 def writeHeader(file, identifiers):
     constants = sorted(identifiers.keys())
@@ -64,7 +78,12 @@ with open(sys.argv[1], "w+") as header:
     header.write("/* Controller identifier constants */\n")
     
     writeHeader(header, controllerIdentifiers)
-    
+
+    header.write("\n")
+    header.write("/* Reuse identifier constants */\n")
+
+    writeHeader(header, reuseIdentifiers)
+
     header.close()
 
 with open(sys.argv[2], "w+") as implementation:
@@ -74,6 +93,10 @@ with open(sys.argv[2], "w+") as implementation:
     implementation.write("\n")
     
     writeImplementation(implementation, controllerIdentifiers)
-    
+    implementation.write("\n")
+
+    writeImplementation(implementation, reuseIdentifiers)
+    implementation.write("\n")
+
     implementation.close()
 
