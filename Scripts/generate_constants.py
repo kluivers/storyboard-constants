@@ -10,25 +10,34 @@ controllerIdentifiers = {}
 reuseIdentifiers = {}
 
 def addSegueIdentifier(identifier):
-	key = identifier[0].upper() + identifier[1:]
-	if not key.startswith(PREFIX.upper()):
-		key = PREFIX.upper() + key
-	
-	segueIdentifiers[key] = identifier
+    key = identifier[0].upper() + identifier[1:]
+    if not key.startswith(PREFIX.upper()):
+        key = PREFIX.upper() + key
+
+    if not key.endswith("Segue"):
+        key = key + "Segue"
+
+    segueIdentifiers[key] = identifier
 
 def addControllerIdentifier(identifier):
     key = identifier[0].upper() + identifier[1:]
     if not key.startswith(PREFIX.upper()):
         key = PREFIX.upper() + key
-    
+
+    if not key.endswith("Identifer"):
+        key = key + "Identifier"
+
     controllerIdentifiers[key] = identifier
 
 def addReuseIdentifier(identifier):
-  key = identifier[0].upper() + identifier[1:]
-  if not key.startswith(PREFIX.upper()):
-    key = PREFIX.upper() + key
+      key = identifier[0].upper() + identifier[1:]
+      if not key.startswith(PREFIX.upper()):
+            key = PREFIX.upper() + key
 
-  reuseIdentifiers[key] = identifier
+      if not key.endswith("ReuseIdentifier"):
+        key = key + "ReuseIdentifier"
+
+      reuseIdentifiers[key] = identifier
 
 def process_storyboard(file):
     tree = et.parse(file)
