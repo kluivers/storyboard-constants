@@ -71,7 +71,7 @@ for n in range(int(count)):
 with open(sys.argv[1], "w+") as header:
     header.write("/* Generated document. DO NOT CHANGE */\n\n")
     header.write("/* Segue identifier constants */\n")
-    
+    header.write("@class NSString;\n\n")
     writeHeader(header, segueIdentifiers)
     
     header.write("\n")
@@ -88,7 +88,7 @@ with open(sys.argv[1], "w+") as header:
 
 with open(sys.argv[2], "w+") as implementation:
     implementation.write("/* Generated document. DO NOT CHANGE */\n\n")
-    
+    implementation.write("#import <Foundation/Foundation.h>\n\n")
     writeImplementation(implementation, segueIdentifiers)
     implementation.write("\n")
     
